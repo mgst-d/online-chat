@@ -1,8 +1,23 @@
 
 <div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <h4> Chats </h4>
+  
+      <%= form_with(model: @room, remote: true, class: "d-flex" ) do |f| %>
+        <%= f.text_field :name, class: "form-control", autocomplete: 'off' %>
+        <%= f.submit data: { disable_with: false } %>
+      <% end %>
 
-  <h4> Чаты </h4>
-  <% @rooms.each do |room|%>
-    <div> <%= link_to room.name, room %> </div>
-  <% end %>
+      <%= turbo_stream_from "rooms" %>
+      <div id="rooms">
+        <%= render @rooms %>
+      </div>
+    </div>
+    <div class="col-md-10 bg-dark">
+      The chat box stays here
+    </div>
+  </div>
+
+  
 </div>
