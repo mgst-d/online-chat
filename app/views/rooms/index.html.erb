@@ -2,12 +2,22 @@
 <div class="container">
   <div class="row">
     <div class="col-md-2">
-    <h5> Hi <%= @current_user.username %> </h5>
+    <% if @current_user%>
+      <h5> Hi, <%= @current_user.username %> </h5>
+      <%= link_to "Sign out", "/sign_out"%>
+    <% else %>
+      <h5> Hi <%= @current_user.username %> </h5>
+      <%= form_with(model: @user, remote: true, class: "d-flex", data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" }) do |f| %>
+        <%= f.text_field :username, class: "form-control", autocomplete: 'off' %>
+        <%= f.submit "Sign in" %>
+      <% end %>
+             
+    <% end %>
       <h4> Chats </h4>
   
       <%= form_with(model: @room, remote: true, class: "d-flex", data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" }) do |f| %>
         <%= f.text_field :name, class: "form-control", autocomplete: 'off' %>
-        <%= f.submit data: { disable_with: false } %>
+        <%= f.submit "Create chat" %>
       <% end %>
       <div>
         <%= turbo_stream_from "rooms" %>
