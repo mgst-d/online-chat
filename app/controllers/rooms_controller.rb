@@ -5,7 +5,7 @@ class RoomsController < ApplicationController
     redirect_to '/sign_in' unless @current_user
     @rooms = Room.all
     @room = Room.new
-
+    @notifications = Notification.all
     # @user = User.find(params[:user_id])
   end
   def create
@@ -19,6 +19,8 @@ class RoomsController < ApplicationController
     @message = Message.new
     @users = User.all
     @messages = @single_room.messages
+    @notifications = Notification.all
+    @notification = Notification.new
     render "index"
   end
 end

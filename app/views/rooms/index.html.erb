@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-10 bg-dark text-light">
+    <div class="col-md-9 bg-dark text-light">
       <% if @single_room %>
         <h4 class="text-center"> <%= @single_room.name %> </h4>
         <%= turbo_stream_from @single_room %>
@@ -34,7 +34,18 @@
           <%= render @messages %>
         </div>
         <%= render partial: 'layouts/new_message_form' %>
+        <%= audio_tag "juntos-607.mp3", id: 'audio_tag'%>
       <% end %>
+    </div>
+    <div class="col-md-1">
+      
+      <%= turbo_stream_from @notifications %>
+      <div id="notifications">
+      
+        <%= render @notifications %>
+        
+      </div>
+      
     </div>
   </div>
 </div>

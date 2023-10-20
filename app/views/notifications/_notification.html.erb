@@ -1,0 +1,5 @@
+<div> 
+<% @notifications.reverse_each do |notification| %>
+<%= notification.to_notification.message %>
+<% end %>
+</div>
